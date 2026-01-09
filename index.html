@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warung Seblak Ajnira - Pedas Nikmat, Bikin Nagih!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.8); }
+    }
+    
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .animate-pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    .animate-slide-up {
+      animation: slide-up 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in {
+      animation: fade-in 1s ease-out forwards;
+    }
+    
+    .menu-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .menu-card:hover {
+      transform: translateY(-12px) scale(1.02);
+    }
+    
+    .btn-order {
+      transition: all 0.3s ease;
+    }
+    
+    .btn-order:hover {
+      transform: scale(1.05);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #dc2626;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .spicy-bg {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1f1f 50%, #1a1a1a 100%);
+    }
+    
+    .fire-gradient {
+      background: linear-gradient(135deg, #dc2626 0%, #f97316 50%, #dc2626 100%);
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .section-divider {
+      background: linear-gradient(90deg, transparent, #dc2626, transparent);
+      height: 2px;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #dc2626;
+      border-radius: 4px;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full spicy-bg text-white overflow-auto"><!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 glass-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16 sm:h-20">
+      <div class="flex items-center gap-2 sm:gap-3">
+       <div class="w-10 h-10 sm:w-12 sm:h-12 fire-gradient rounded-full flex items-center justify-center"><span class="text-xl sm:text-2xl">🌶️</span>
+       </div><span class="font-display text-xl sm:text-2xl font-bold text-white">Ajnira</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8"><a href="index.html" class="nav-link text-white hover:text-red-400 transition-colors">Portal</a> <a href="#beranda" class="nav-link text-white hover:text-red-400 transition-colors">Beranda</a> <a href="#menu" class="nav-link text-white hover:text-red-400 transition-colors">Menu</a> <a href="#tentang" class="nav-link text-white hover:text-red-400 transition-colors">Tentang</a> <a href="#testimoni" class="nav-link text-white hover:text-red-400 transition-colors">Testimoni</a> <a href="#kontak" class="nav-link text-white hover:text-red-400 transition-colors">Kontak</a>
+      </div><button id="mobileMenuBtn" class="md:hidden text-white p-2">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </div><!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden glass-card border-t border-white/10">
+     <div class="px-4 py-4 space-y-3"><a href="index.html" class="block text-white hover:text-red-400 transition-colors py-2">Portal</a> <a href="#beranda" class="block text-white hover:text-red-400 transition-colors py-2">Beranda</a> <a href="#menu" class="block text-white hover:text-red-400 transition-colors py-2">Menu</a> <a href="#tentang" class="block text-white hover:text-red-400 transition-colors py-2">Tentang</a> <a href="#testimoni" class="block text-white hover:text-red-400 transition-colors py-2">Testimoni</a> <a href="#kontak" class="block text-white hover:text-red-400 transition-colors py-2">Kontak</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="beranda" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"><!-- Background Elements -->
+    <div class="absolute inset-0">
+     <div class="absolute top-20 left-10 text-6xl sm:text-8xl opacity-10 animate-float">
+      🌶️
+     </div>
+     <div class="absolute top-40 right-20 text-5xl sm:text-7xl opacity-10 animate-float" style="animation-delay: 0.5s;">
+      🔥
+     </div>
+     <div class="absolute bottom-40 left-20 text-4xl sm:text-6xl opacity-10 animate-float" style="animation-delay: 1s;">
+      🍜
+     </div>
+     <div class="absolute bottom-20 right-10 text-5xl sm:text-7xl opacity-10 animate-float" style="animation-delay: 1.5s;">
+      🌶️
+     </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+     <div class="animate-slide-up">
+      <div class="inline-block mb-6"><span class="bg-red-600/20 text-red-400 px-4 py-2 rounded-full text-sm font-medium border border-red-600/30"> 🔥 Seblak Terpedas di Kota! </span>
+      </div>
+      <h1 id="heroTitle" class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">Seblak <span class="text-transparent bg-clip-text fire-gradient">Ajnira</span></h1>
+      <p id="heroTagline" class="text-xl sm:text-2xl md:text-3xl text-gray-300 mb-8 max-w-2xl mx-auto">Pedas Nikmat, Bikin Nagih! 🌶️</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"><button onclick="scrollToSection('menu')" class="btn-order fire-gradient text-white px-8 py-4 rounded-full text-lg font-semibold animate-pulse-glow flex items-center gap-2"> <span>Lihat Menu</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button> <button onclick="openWhatsApp()" class="btn-order bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold flex items-center gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg><span>Pesan Sekarang</span> </button>
+      </div><!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto">
+       <div class="glass-card rounded-2xl p-4 sm:p-6">
+        <div class="text-2xl sm:text-4xl font-bold text-red-500">
+         5K+
+        </div>
+        <div class="text-xs sm:text-sm text-gray-400">
+         Pelanggan Puas
+        </div>
+       </div>
+       <div class="glass-card rounded-2xl p-4 sm:p-6">
+        <div class="text-2xl sm:text-4xl font-bold text-orange-500">
+         15+
+        </div>
+        <div class="text-xs sm:text-sm text-gray-400">
+         Varian Menu
+        </div>
+       </div>
+       <div class="glass-card rounded-2xl p-4 sm:p-6">
+        <div class="text-2xl sm:text-4xl font-bold text-yellow-500">
+         4.9
+        </div>
+        <div class="text-xs sm:text-sm text-gray-400">
+         Rating
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+     <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+     </svg>
+    </div>
+   </section><!-- Menu Section -->
+   <section id="menu" class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-16"><span class="text-red-500 font-medium text-sm uppercase tracking-wider">Menu Spesial</span>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mt-2 mb-4">Menu Andalan Kami</h2>
+      <div class="section-divider w-24 mx-auto"></div>
+      <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Pilih level kepedasan sesuai selera! Dari yang manis sampai level dewa pedas 🔥</p>
+     </div><!-- Spicy Level Filter -->
+     <div class="flex flex-wrap justify-center gap-3 mb-12"><button onclick="filterMenu('all')" class="filter-btn active px-6 py-2 rounded-full bg-red-600 text-white font-medium transition-all hover:bg-red-700" data-filter="all"> Semua </button> <button onclick="filterMenu('mild')" class="filter-btn px-6 py-2 rounded-full bg-white/10 text-white font-medium transition-all hover:bg-white/20" data-filter="mild"> 🌶️ Mild </button> <button onclick="filterMenu('medium')" class="filter-btn px-6 py-2 rounded-full bg-white/10 text-white font-medium transition-all hover:bg-white/20" data-filter="medium"> 🌶️🌶️ Medium </button> <button onclick="filterMenu('hot')" class="filter-btn px-6 py-2 rounded-full bg-white/10 text-white font-medium transition-all hover:bg-white/20" data-filter="hot"> 🌶️🌶️🌶️ Hot </button> <button onclick="filterMenu('extreme')" class="filter-btn px-6 py-2 rounded-full bg-white/10 text-white font-medium transition-all hover:bg-white/20" data-filter="extreme"> 🔥 Extreme </button>
+     </div><!-- Menu Grid -->
+     <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><!-- Menu items will be rendered by JavaScript -->
+     </div>
+    </div>
+   </section><!-- Tentang Section -->
+   <section id="tentang" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/30">
+    <div class="max-w-7xl mx-auto">
+     <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div><span class="text-red-500 font-medium text-sm uppercase tracking-wider">Tentang Kami</span>
+       <h2 class="font-display text-4xl sm:text-5xl font-bold mt-2 mb-6">Cerita di Balik Seblak Ajnira</h2>
+       <div class="section-divider w-24 mb-6"></div>
+       <p id="aboutText" class="text-gray-300 leading-relaxed mb-6">Warung Seblak Ajnira berdiri sejak 2020 dengan misi menghadirkan seblak autentik khas Bandung dengan cita rasa yang unik dan bumbu rahasia turun-temurun. Kami percaya bahwa makanan pedas bukan hanya soal rasa, tapi juga pengalaman yang membahagiakan!</p>
+       <div class="grid grid-cols-2 gap-4 mb-8">
+        <div class="glass-card rounded-xl p-4">
+         <div class="text-red-500 text-2xl mb-2">
+          👨‍🍳
+         </div>
+         <div class="font-semibold">
+          Chef Berpengalaman
+         </div>
+         <div class="text-sm text-gray-400">
+          5+ tahun di bidang kuliner
+         </div>
+        </div>
+        <div class="glass-card rounded-xl p-4">
+         <div class="text-red-500 text-2xl mb-2">
+          🌿
+         </div>
+         <div class="font-semibold">
+          Bahan Segar
+         </div>
+         <div class="text-sm text-gray-400">
+          Setiap hari dari pasar lokal
+         </div>
+        </div>
+        <div class="glass-card rounded-xl p-4">
+         <div class="text-red-500 text-2xl mb-2">
+          🏆
+         </div>
+         <div class="font-semibold">
+          Kualitas Terjamin
+         </div>
+         <div class="text-sm text-gray-400">
+          Standar kebersihan tinggi
+         </div>
+        </div>
+        <div class="glass-card rounded-xl p-4">
+         <div class="text-red-500 text-2xl mb-2">
+          ❤️
+         </div>
+         <div class="font-semibold">
+          Dibuat dengan Cinta
+         </div>
+         <div class="text-sm text-gray-400">
+          Resep keluarga asli
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="relative">
+       <div class="glass-card rounded-3xl p-8 relative overflow-hidden"><!-- Decorative Bowl SVG -->
+        <svg viewbox="0 0 400 300" class="w-full h-auto"><defs>
+          <lineargradient id="bowlGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" style="stop-color:#f97316" />
+           <stop offset="100%" style="stop-color:#dc2626" />
+          </lineargradient>
+          <lineargradient id="steamGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+           <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.5" />
+           <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+          </lineargradient>
+         </defs> <!-- Steam --> <g class="animate-float">
+          <path d="M150 80 Q160 60 150 40 Q140 20 150 0" stroke="url(#steamGradient)" stroke-width="8" fill="none" stroke-linecap="round" />
+          <path d="M200 90 Q210 65 200 45 Q190 25 200 5" stroke="url(#steamGradient)" stroke-width="8" fill="none" stroke-linecap="round" />
+          <path d="M250 80 Q260 60 250 40 Q240 20 250 0" stroke="url(#steamGradient)" stroke-width="8" fill="none" stroke-linecap="round" />
+         </g> <!-- Bowl --> <ellipse cx="200" cy="200" rx="150" ry="60" fill="#8B4513" /> <ellipse cx="200" cy="180" rx="140" ry="50" fill="url(#bowlGradient)" /> <ellipse cx="200" cy="170" rx="130" ry="45" fill="#c2410c" /> <!-- Food elements --> <circle cx="160" cy="160" r="15" fill="#FCD34D" /> <circle cx="200" cy="155" r="12" fill="#fff" /> <circle cx="240" cy="160" r="15" fill="#FCD34D" /> <ellipse cx="180" cy="175" rx="20" ry="8" fill="#f472b6" /> <ellipse cx="220" cy="175" rx="20" ry="8" fill="#f472b6" /> <!-- Chilies --> <ellipse cx="150" cy="145" rx="15" ry="5" fill="#dc2626" transform="rotate(-20 150 145)" /> <ellipse cx="250" cy="145" rx="15" ry="5" fill="#dc2626" transform="rotate(20 250 145)" /> <ellipse cx="200" cy="140" rx="15" ry="5" fill="#22c55e" transform="rotate(0 200 140)" />
+        </svg>
+        <div class="text-center mt-4"><span class="text-4xl">🌶️🔥🌶️</span>
+         <p class="text-gray-400 mt-2 italic">"Setiap suapan adalah kebahagiaan"</p>
+        </div>
+       </div><!-- Floating badges -->
+       <div class="absolute -top-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold animate-float">
+        Best Seller! 🏆
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Testimoni Section -->
+   <section id="testimoni" class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-16"><span class="text-red-500 font-medium text-sm uppercase tracking-wider">Testimoni</span>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mt-2 mb-4">Kata Mereka</h2>
+      <div class="section-divider w-24 mx-auto"></div>
+     </div>
+     <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-card rounded-2xl p-6 hover:bg-white/10 transition-all">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+       </div>
+       <p class="text-gray-300 mb-4 italic">"Seblaknya enak banget! Level pedasnya pas, topping melimpah. Pasti balik lagi! 🔥"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center font-bold">
+         A
+        </div>
+        <div>
+         <div class="font-semibold">
+          Anisa R.
+         </div>
+         <div class="text-sm text-gray-400">
+          Pelanggan Setia
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 hover:bg-white/10 transition-all">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+       </div>
+       <p class="text-gray-300 mb-4 italic">"Bumbu rahasianya bikin nagih! Sudah order berkali-kali dan tidak pernah mengecewakan."</p>
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center font-bold">
+         B
+        </div>
+        <div>
+         <div class="font-semibold">
+          Budi S.
+         </div>
+         <div class="text-sm text-gray-400">
+          Food Blogger
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 hover:bg-white/10 transition-all">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-500">⭐⭐⭐⭐⭐</span>
+       </div>
+       <p class="text-gray-300 mb-4 italic">"Porsinya gede, harganya ramah kantong. Recommended banget untuk pecinta pedas! 🌶️"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center font-bold">
+         C
+        </div>
+        <div>
+         <div class="font-semibold">
+          Citra M.
+         </div>
+         <div class="text-sm text-gray-400">
+          Mahasiswa
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Promo Section -->
+   <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-900/50 to-orange-900/50">
+    <div class="max-w-4xl mx-auto text-center">
+     <div class="inline-block bg-yellow-500 text-black px-4 py-1 rounded-full text-sm font-bold mb-4 animate-pulse">
+      🎉 PROMO SPESIAL
+     </div>
+     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Diskon 20% untuk Pemesanan Pertama!</h2>
+     <p class="text-gray-300 mb-8 text-lg">Gunakan kode <span class="text-yellow-500 font-bold">AJNIRA20</span> saat checkout</p><button onclick="openWhatsApp('Halo, saya mau pesan dengan kode promo AJNIRA20!')" class="btn-order fire-gradient text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center gap-2"> <span>Klaim Promo Sekarang</span>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg></button>
+    </div>
+   </section><!-- Kontak Section -->
+   <section id="kontak" class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-16"><span class="text-red-500 font-medium text-sm uppercase tracking-wider">Hubungi Kami</span>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mt-2 mb-4">Lokasi &amp; Kontak</h2>
+      <div class="section-divider w-24 mx-auto"></div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8">
+      <div class="glass-card rounded-2xl p-8">
+       <h3 class="text-2xl font-bold mb-6">Informasi Kontak</h3>
+       <div class="space-y-6">
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 fire-gradient rounded-xl flex items-center justify-center flex-shrink-0"><span class="text-xl">📍</span>
+         </div>
+         <div>
+          <div class="font-semibold mb-1">
+           Alamat
+          </div>
+          <p id="addressText" class="text-gray-400">Jl. Seblak Pedas No. 123, Bandung, Jawa Barat 40123</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 fire-gradient rounded-xl flex items-center justify-center flex-shrink-0"><span class="text-xl">📞</span>
+         </div>
+         <div>
+          <div class="font-semibold mb-1">
+           Telepon
+          </div>
+          <p id="phoneText" class="text-gray-400">0812-3456-7890</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+         </div>
+         <div>
+          <div class="font-semibold mb-1">
+           WhatsApp
+          </div>
+          <p id="whatsappText" class="text-gray-400">0812-3456-7890</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 fire-gradient rounded-xl flex items-center justify-center flex-shrink-0"><span class="text-xl">🕐</span>
+         </div>
+         <div>
+          <div class="font-semibold mb-1">
+           Jam Operasional
+          </div>
+          <p class="text-gray-400">Senin - Minggu: 10:00 - 22:00</p>
+         </div>
+        </div>
+       </div>
+       <div class="mt-8 flex gap-4"><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 glass-card rounded-xl flex items-center justify-center hover:bg-pink-600 transition-all">
+         <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+         </svg></a> <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 glass-card rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all">
+         <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+         </svg></a> <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 glass-card rounded-xl flex items-center justify-center hover:bg-black transition-all">
+         <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+         </svg></a>
+       </div>
+      </div><!-- Order Form -->
+      <div class="glass-card rounded-2xl p-8">
+       <h3 class="text-2xl font-bold mb-6">Pesan Cepat</h3>
+       <form id="orderForm" class="space-y-4">
+        <div><label for="nama" class="block text-sm font-medium mb-2">Nama Lengkap</label> <input type="text" id="nama" name="nama" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all" placeholder="Masukkan nama Anda">
+        </div>
+        <div><label for="noHp" class="block text-sm font-medium mb-2">No. HP / WhatsApp</label> <input type="tel" id="noHp" name="noHp" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all" placeholder="08xx-xxxx-xxxx">
+        </div>
+        <div><label for="menuPilihan" class="block text-sm font-medium mb-2">Menu Pilihan</label> <select id="menuPilihan" name="menuPilihan" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all"> <option value="" class="bg-gray-900">Pilih Menu</option> <option value="Seblak Original" class="bg-gray-900">Seblak Original</option> <option value="Seblak Ceker Mercon" class="bg-gray-900">Seblak Ceker Mercon</option> <option value="Seblak Seafood" class="bg-gray-900">Seblak Seafood</option> <option value="Seblak Bakso Urat" class="bg-gray-900">Seblak Bakso Urat</option> <option value="Seblak Komplit" class="bg-gray-900">Seblak Komplit</option> </select>
+        </div>
+        <div><label for="levelPedas" class="block text-sm font-medium mb-2">Level Pedas</label> <select id="levelPedas" name="levelPedas" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all"> <option value="" class="bg-gray-900">Pilih Level</option> <option value="Mild" class="bg-gray-900">🌶️ Mild</option> <option value="Medium" class="bg-gray-900">🌶️🌶️ Medium</option> <option value="Hot" class="bg-gray-900">🌶️🌶️🌶️ Hot</option> <option value="Extreme" class="bg-gray-900">🔥 Extreme</option> </select>
+        </div>
+        <div><label for="catatan" class="block text-sm font-medium mb-2">Catatan Tambahan</label> <textarea id="catatan" name="catatan" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all resize-none" placeholder="Contoh: Extra kerupuk, tanpa daun bawang..."></textarea>
+        </div><button type="submit" class="w-full btn-order fire-gradient text-white px-6 py-4 rounded-xl text-lg font-semibold flex items-center justify-center gap-2">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+         </svg><span>Pesan via WhatsApp</span> </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+       <div class="w-10 h-10 fire-gradient rounded-full flex items-center justify-center"><span class="text-xl">🌶️</span>
+       </div><span class="font-display text-xl font-bold">Warung Seblak Ajnira</span>
+      </div>
+      <p class="text-gray-400 text-sm">© 2024 Warung Seblak Ajnira. All rights reserved.</p>
+     </div>
+    </div>
+   </footer><!-- Menu Detail Modal -->
+   <div id="menuModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-4">
+     <div class="glass-card rounded-3xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto"><button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+      <div id="modalContent"><!-- Content will be populated by JavaScript -->
+      </div>
+     </div>
+    </div>
+   </div><!-- Toast Notification -->
+   <div id="toast" class="fixed bottom-4 right-4 z-50 transform translate-y-full opacity-0 transition-all duration-300">
+    <div class="glass-card rounded-xl px-6 py-4 flex items-center gap-3"><span id="toastIcon" class="text-2xl">✅</span> <span id="toastMessage" class="text-white font-medium">Pesan berhasil dikirim!</span>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Default Configuration
+    const defaultConfig = {
+      hero_title: 'Seblak Ajnira',
+      hero_tagline: 'Pedas Nikmat, Bikin Nagih! 🌶️',
+      about_text: 'Warung Seblak Ajnira berdiri sejak 2020 dengan misi menghadirkan seblak autentik khas Bandung dengan cita rasa yang unik dan bumbu rahasia turun-temurun. Kami percaya bahwa makanan pedas bukan hanya soal rasa, tapi juga pengalaman yang membahagiakan!',
+      address: 'Jl. Seblak Pedas No. 123, Bandung, Jawa Barat 40123',
+      phone: '0812-3456-7890',
+      whatsapp: '6281234567890',
+      background_color: '#1a1a1a',
+      surface_color: '#2d1f1f',
+      text_color: '#ffffff',
+      primary_action_color: '#dc2626',
+      secondary_action_color: '#f97316'
+    };
+
+    let config = { ...defaultConfig };
+
+    // Menu Data
+    const menuItems = [
+      { id: 1, name: 'Seblak Original', price: 15000, spicy: 'mild', desc: 'Seblak klasik dengan kerupuk, telur, dan bumbu kacang spesial', toppings: ['Kerupuk', 'Telur', 'Sawi'], emoji: '🍜', popular: false },
+      { id: 2, name: 'Seblak Ceker Mercon', price: 20000, spicy: 'hot', desc: 'Seblak dengan ceker ayam super pedas level mercon!', toppings: ['Ceker Ayam', 'Kerupuk', 'Telur', 'Cabai Rawit'], emoji: '🔥', popular: true },
+      { id: 3, name: 'Seblak Seafood', price: 25000, spicy: 'medium', desc: 'Seblak dengan aneka seafood segar pilihan', toppings: ['Udang', 'Cumi', 'Bakso Ikan', 'Kerupuk'], emoji: '🦐', popular: true },
+      { id: 4, name: 'Seblak Bakso Urat', price: 18000, spicy: 'medium', desc: 'Seblak dengan bakso urat kenyal dan gurih', toppings: ['Bakso Urat', 'Kerupuk', 'Telur', 'Tahu'], emoji: '🥩', popular: false },
+      { id: 5, name: 'Seblak Komplit', price: 30000, spicy: 'hot', desc: 'Seblak dengan semua topping lengkap!', toppings: ['Ceker', 'Bakso', 'Seafood', 'Telur', 'Kerupuk', 'Tahu', 'Sosis'], emoji: '👑', popular: true },
+      { id: 6, name: 'Seblak Tulang Rangu', price: 22000, spicy: 'extreme', desc: 'Seblak dengan tulang rangu empuk berempah', toppings: ['Tulang Rangu', 'Kerupuk', 'Telur'], emoji: '🍖', popular: false },
+      { id: 7, name: 'Seblak Mie Yamin', price: 17000, spicy: 'mild', desc: 'Perpaduan seblak dan mie yamin yang unik', toppings: ['Mie', 'Kerupuk', 'Bakso', 'Pangsit'], emoji: '🍝', popular: false },
+      { id: 8, name: 'Seblak Sosis Jumbo', price: 19000, spicy: 'medium', desc: 'Seblak dengan sosis jumbo premium', toppings: ['Sosis Jumbo', 'Kerupuk', 'Telur', 'Nugget'], emoji: '🌭', popular: false },
+      { id: 9, name: 'Seblak Kuah Santan', price: 23000, spicy: 'mild', desc: 'Seblak creamy dengan kuah santan gurih', toppings: ['Ayam Suwir', 'Kerupuk', 'Telur', 'Tahu Pong'], emoji: '🥥', popular: false },
+      { id: 10, name: 'Seblak Dewa Pedas', price: 35000, spicy: 'extreme', desc: 'Level tertinggi untuk pecinta pedas sejati! Berani coba?', toppings: ['Semua Topping', 'Extra Cabai', 'Sambal Spesial'], emoji: '☠️', popular: true },
+      { id: 11, name: 'Seblak Vegetarian', price: 16000, spicy: 'mild', desc: 'Seblak tanpa daging untuk vegetarian', toppings: ['Tahu', 'Tempe', 'Jamur', 'Sayuran'], emoji: '🥬', popular: false },
+      { id: 12, name: 'Seblak Cheese Lover', price: 28000, spicy: 'medium', desc: 'Seblak dengan lelehan keju mozarella', toppings: ['Keju Mozarella', 'Sosis', 'Nugget', 'Kerupuk'], emoji: '🧀', popular: true }
+    ];
+
+    let currentFilter = 'all';
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          updateUI();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => window.elementSdk.setConfig({ background_color: value })
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => window.elementSdk.setConfig({ primary_action_color: value })
+            },
+            {
+              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_action_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+          ['hero_tagline', cfg.hero_tagline || defaultConfig.hero_tagline],
+          ['about_text', cfg.about_text || defaultConfig.about_text],
+          ['address', cfg.address || defaultConfig.address],
+          ['phone', cfg.phone || defaultConfig.phone],
+          ['whatsapp', cfg.whatsapp || defaultConfig.whatsapp]
+        ])
+      });
+    }
+
+    function updateUI() {
+      // Update hero section
+      const heroTitle = document.getElementById('heroTitle');
+      if (heroTitle) {
+        heroTitle.innerHTML = `Seblak <span class="text-transparent bg-clip-text fire-gradient">${config.hero_title || defaultConfig.hero_title}</span>`;
+      }
+      
+      const heroTagline = document.getElementById('heroTagline');
+      if (heroTagline) {
+        heroTagline.textContent = config.hero_tagline || defaultConfig.hero_tagline;
+      }
+      
+      const aboutText = document.getElementById('aboutText');
+      if (aboutText) {
+        aboutText.textContent = config.about_text || defaultConfig.about_text;
+      }
+      
+      const addressText = document.getElementById('addressText');
+      if (addressText) {
+        addressText.textContent = config.address || defaultConfig.address;
+      }
+      
+      const phoneText = document.getElementById('phoneText');
+      if (phoneText) {
+        phoneText.textContent = config.phone || defaultConfig.phone;
+      }
+      
+      const whatsappText = document.getElementById('whatsappText');
+      if (whatsappText) {
+        whatsappText.textContent = config.phone || defaultConfig.phone;
+      }
+
+      // Update colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+      document.documentElement.style.setProperty('--bg-color', bgColor);
+      document.documentElement.style.setProperty('--surface-color', surfaceColor);
+      document.documentElement.style.setProperty('--text-color', textColor);
+      document.documentElement.style.setProperty('--primary-color', primaryColor);
+      document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+    }
+
+    // Render Menu
+    function renderMenu(filter = 'all') {
+      const grid = document.getElementById('menuGrid');
+      let filteredItems = menuItems;
+      
+      if (filter !== 'all') {
+        filteredItems = menuItems.filter(item => item.spicy === filter);
+      }
+      
+      grid.innerHTML = filteredItems.map((item, index) => `
+        <div class="menu-card glass-card rounded-2xl overflow-hidden cursor-pointer animate-fade-in" style="animation-delay: ${index * 0.1}s" onclick="openMenuDetail(${item.id})" data-spicy="${item.spicy}">
+          <div class="relative h-48 bg-gradient-to-br from-red-900/50 to-orange-900/50 flex items-center justify-center">
+            <span class="text-7xl">${item.emoji}</span>
+            ${item.popular ? '<div class="absolute top-3 right-3 bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold">Popular 🔥</div>' : ''}
+            <div class="absolute bottom-3 left-3 flex items-center gap-1">
+              ${getSpicyIndicator(item.spicy)}
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg mb-2">${item.name}</h3>
+            <p class="text-gray-400 text-sm mb-4 line-clamp-2">${item.desc}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-red-500">Rp ${item.price.toLocaleString('id-ID')}</span>
+              <button onclick="event.stopPropagation(); orderItem('${item.name}', ${item.price})" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all">
+                Pesan
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getSpicyIndicator(level) {
+      switch(level) {
+        case 'mild': return '<span class="bg-green-500/80 px-2 py-1 rounded text-xs">🌶️ Mild</span>';
+        case 'medium': return '<span class="bg-yellow-500/80 px-2 py-1 rounded text-xs text-black">🌶️🌶️ Medium</span>';
+        case 'hot': return '<span class="bg-orange-500/80 px-2 py-1 rounded text-xs">🌶️🌶️🌶️ Hot</span>';
+        case 'extreme': return '<span class="bg-red-600/80 px-2 py-1 rounded text-xs">🔥 Extreme</span>';
+        default: return '';
+      }
+    }
+
+    function filterMenu(filter) {
+      currentFilter = filter;
+      
+      // Update button states
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.filter === filter) {
+          btn.classList.remove('bg-white/10');
+          btn.classList.add('bg-red-600');
+        } else {
+          btn.classList.remove('bg-red-600');
+          btn.classList.add('bg-white/10');
+        }
+      });
+      
+      renderMenu(filter);
+    }
+
+    function openMenuDetail(id) {
+      const item = menuItems.find(m => m.id === id);
+      if (!item) return;
+      
+      const modal = document.getElementById('menuModal');
+      const content = document.getElementById('modalContent');
+      
+      content.innerHTML = `
+        <div class="text-center mb-6">
+          <span class="text-8xl">${item.emoji}</span>
+        </div>
+        <div class="text-center mb-6">
+          ${getSpicyIndicator(item.spicy)}
+          ${item.popular ? '<span class="ml-2 bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold">Popular 🔥</span>' : ''}
+        </div>
+        <h3 class="font-display text-2xl font-bold text-center mb-2">${item.name}</h3>
+        <p class="text-gray-400 text-center mb-6">${item.desc}</p>
+        
+        <div class="mb-6">
+          <h4 class="font-semibold mb-3">Topping:</h4>
+          <div class="flex flex-wrap gap-2">
+            ${item.toppings.map(t => `<span class="bg-white/10 px-3 py-1 rounded-full text-sm">${t}</span>`).join('')}
+          </div>
+        </div>
+        
+        <div class="flex items-center justify-between mb-6">
+          <span class="text-3xl font-bold text-red-500">Rp ${item.price.toLocaleString('id-ID')}</span>
+        </div>
+        
+        <button onclick="orderItem('${item.name}', ${item.price}); closeModal();" class="w-full fire-gradient text-white px-6 py-4 rounded-xl text-lg font-semibold flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <span>Pesan Sekarang</span>
+        </button>
+      `;
+      
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('menuModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function orderItem(name, price) {
+      const waNumber = config.whatsapp || defaultConfig.whatsapp;
+      const message = encodeURIComponent(`Halo, saya mau pesan:\n\n📍 Menu: ${name}\n💰 Harga: Rp ${price.toLocaleString('id-ID')}\n\nMohon info selanjutnya ya! 🙏`);
+      window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
+    }
+
+    function openWhatsApp(customMessage = '') {
+      const waNumber = config.whatsapp || defaultConfig.whatsapp;
+      const message = customMessage || 'Halo, saya tertarik untuk memesan Seblak Ajnira! 🌶️';
+      window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function showToast(message, icon = '✅') {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      
+      toastMessage.textContent = message;
+      toastIcon.textContent = icon;
+      
+      toast.classList.remove('translate-y-full', 'opacity-0');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-full', 'opacity-0');
+      }, 3000);
+    }
+
+    // Mobile Menu Toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.add('hidden');
+      });
+    });
+
+    // Order Form Handler
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const nama = document.getElementById('nama').value;
+      const noHp = document.getElementById('noHp').value;
+      const menu = document.getElementById('menuPilihan').value;
+      const level = document.getElementById('levelPedas').value;
+      const catatan = document.getElementById('catatan').value;
+      
+      const waNumber = config.whatsapp || defaultConfig.whatsapp;
+      const message = `Halo, saya mau pesan Seblak Ajnira! 🌶️
+
+📋 *Detail Pesanan:*
+👤 Nama: ${nama}
+📱 No. HP: ${noHp}
+🍜 Menu: ${menu}
+🌶️ Level Pedas: ${level}
+${catatan ? `📝 Catatan: ${catatan}` : ''}
+
+Mohon konfirmasi pesanan saya ya! 🙏`;
+
+      window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+      showToast('Mengarahkan ke WhatsApp...', '📱');
+      e.target.reset();
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    renderMenu();
+    updateUI();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb0ab7b146b2f2a',t:'MTc2NzkyNzQ3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
